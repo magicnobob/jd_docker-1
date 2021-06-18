@@ -176,7 +176,7 @@ async function zoo() {
     }
     //收金币
     await $.wait(1000);
-    await takePostRequest('zoo_collectProduceScore');
+    await takePostRequest( 'zoo_collectProduceScore' );
     await $.wait(1000);
     await takePostRequest('zoo_getTaskDetail');
     await $.wait(1000);
@@ -576,8 +576,18 @@ async function dealReturn(type, data) {
     case 'zoo_collectProduceScore':
       if (data.code === 0 && data.data && data.data.result) {
         console.log(`收取成功，获得：${data.data.result.produceScore}`);
-      }else{
-        console.log(JSON.stringify(data));
+      } else {
+        // const resObj = JSON.stringify( data );
+        const resObj = data;
+        if ( resObj && resObj.code == 0) {
+          if ( resObj.data && resObj.data.success == false) {
+            console.log( resObj.data.bizMsg );
+          } else {
+            console.log( JSON.stringify(resObj) );
+          }
+        } else {
+          console.log( JSON.stringify(resObj));
+        }
       }
       if(data.code === 0 && data.data && data.data.bizCode === -1002){
         $.hotFlag = true;
@@ -585,17 +595,30 @@ async function dealReturn(type, data) {
       }
       break;
     case 'zoo_getTaskDetail':
-      if (data.code === 0) {
-        console.log(`互助码：${data.data.result.inviteId || '助力已满，获取助力码失败'}`);
-        if (data.data.result.inviteId) {
-          $.inviteList.push({
-            'ues': $.UserName,
-            'secretp': $.secretp,
-            'inviteId': data.data.result.inviteId,
-            'max': false
-          });
+      if ( data.code === 0 ) {
+        const resObj = data;
+        if ( resObj && resObj.code == 0 ) {
+          if ( resObj.data && resObj.data.success == false ) {
+            console.log( resObj.data.bizMsg );
+          } else {
+            if ( resObj.data && resObj.data.success == true) {
+              console.log( `互助码：${ resObj.data.result.inviteId || '助力已满，获取助力码失败' }` );
+              if ( resObj.data.result.inviteId ) {
+                $.inviteList.push( {
+                  'ues': $.UserName,
+                  'secretp': $.secretp,
+                  'inviteId': resObj.data.result.inviteId,
+                  'max': false
+                } );
+              }
+              $.taskList = resObj.data.result.taskVos;
+            } else {
+              console.log( JSON.stringify( resObj ) );
+            }
+          }
+        } else {
+          console.log( JSON.stringify( resObj ) );
         }
-        $.taskList = data.data.result.taskVos;
       }
       break;
     case 'zoo_collectScore':
@@ -607,39 +630,55 @@ async function dealReturn(type, data) {
     case 'help':
     case 'pkHelp':
       //console.log(data);
-      switch (data.data.bizCode) {
-        case 0:
-          console.log(`助力成功`);
-          break;
-        case -201:
-          console.log(`助力已满`);
-          $.oneInviteInfo.max = true;
-          break;
-        case -202:
-          console.log(`已助力`);
-          break;
-        case -8:
-          console.log(`已经助力过该队伍`);
-          break;
-        case -6:
-        case 108:
-          console.log(`助力次数已用光`);
-          $.canHelp = false;
-          break;
-        default:
-          console.log(`怪兽大作战助力失败：${JSON.stringify(data)}`);
+      if ( data && data.data && data.data.bizCode) {
+        switch (data.data.bizCode) {
+          case 0:
+            console.log(`助力成功`);
+            break;
+          case -201:
+            console.log(`助力已满`);
+            $.oneInviteInfo.max = true;
+            break;
+          case -202:
+            console.log(`已助力`);
+            break;
+          case -8:
+            console.log(`已经助力过该队伍`);
+            break;
+          case -6:
+          case 108:
+            console.log(`助力次数已用光`);
+            $.canHelp = false;
+            break;
+          default:
+            const resObj = data;
+            if ( resObj && resObj.code == 0 ) {
+              if ( resObj.data && resObj.data.success == false ) {
+                console.log( resObj.data.bizMsg );
+              } else {
+                console.log( JSON.stringify( resObj ) );
+              }
+            } else {
+              console.log( `怪兽大作战助力失败：${ JSON.stringify( data ) }` );
+            }
+            // console.log(`怪兽大作战助力失败：${JSON.stringify(data)}`);
+        }
+        break;
       }
-      break;
     case 'zoo_pk_getHomeData':
-      if (data.code === 0) {
-        console.log(`PK互助码：${data.data.result.groupInfo.groupAssistInviteId}`);
-        if (data.data.result.groupInfo.groupAssistInviteId) $.pkInviteList.push(data.data.result.groupInfo.groupAssistInviteId);
-        $.pkHomeData = data.data;
+      if ( data.code === 0 ) {
+        if ( data && data.data && data.data.result) {
+          console.log(`PK互助码：${data.data.result.groupInfo.groupAssistInviteId}`);
+          if (data.data.result.groupInfo.groupAssistInviteId) $.pkInviteList.push(data.data.result.groupInfo.groupAssistInviteId);
+          $.pkHomeData = data.data;
+        }
       }
       break;
     case 'zoo_pk_getTaskDetail':
       if (data.code === 0) {
-        $.pkTaskList = data.data.result.taskVos;
+        if ( data && data.data && data.data.result) {
+          $.pkTaskList = data.data.result.taskVos;
+        }
       }
       break;
     case 'zoo_getFeedDetail':
@@ -674,8 +713,10 @@ async function dealReturn(type, data) {
       }
       break;
     case 'wxTaskDetail':
-      if (data.code === 0) {
-        $.wxTaskList = data.data.result.taskVos;
+      if ( data.code === 0 ) {
+        if ( data && data.data && data.data.result) {
+          $.wxTaskList = data.data.result.taskVos;
+        }
       }
       break;
     case 'zoo_shopLotteryInfo':
