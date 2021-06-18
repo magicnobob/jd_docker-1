@@ -18,10 +18,10 @@ cron "5 0 * * *" script-path=jx_sign.js,tag=京喜签到
 京喜签到 = type=cron,script-path=jx_sign.js, cronexpr="5 0 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京喜签到');
-const notify = $.isNode() ? require('../sendNotify') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
-let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
+const jdCookieNode = $.isNode() ? require( './jdCookie.js' ) : '';
+let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let helpAuthor = true
@@ -117,14 +117,22 @@ function getTaskList() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            if(data.retCode ===0){
-              for (task of data.data.tasks) {
-                if(task.taskState===1){
-                  console.log(`去做${task.taskName}任务`)
-                  await doTask(task.taskId);
-                  await $.wait(1000)
-                  await finishTask(task.taskId);
-                  await $.wait(1000)
+            if ( data.retCode === 0 ) {
+              if ( data && data.data ) {
+                if (data.data.tasks) {
+                  for (task of data.data.tasks) {
+                    if(task.taskState===1){
+                      console.log(`去做${task.taskName}任务`)
+                      await doTask(task.taskId);
+                      await $.wait(1000)
+                      await finishTask(task.taskId);
+                      await $.wait(1000)
+                    }
+                  }
+                } else {
+                  if ( data.errMsg === 'success' ) {
+                    console.log( `已经签到过，信息${ data.errMsg }` )
+                  }
                 }
               }
             }else{
@@ -149,7 +157,7 @@ function doTask(id) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (safeGet(data)) {
-            data = JSON.parse(data);
+            data = JSON.parse( data );
             if(data.retCode ===0){
               console.log(`任务领取成功`)
             }else{
@@ -174,7 +182,7 @@ function finishTask(id) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (safeGet(data)) {
-            data = JSON.parse(data);
+            data = JSON.parse( data );
             if(data.retCode ===0){
               console.log(`任务完成成功，获得金币${data.datas[0]['pingouJin']}`)
               $.coins += data.datas[0]['pingouJin']
@@ -191,16 +199,16 @@ function finishTask(id) {
     })
   })
 }
-function doubleSign() {
-  return new Promise((resolve) => {
-    $.get(taskUrl("double_sign/IssueReward",), async (err, resp, data) => {
+function doubleSign () {
+  return new Promise( ( resolve ) => {
+    $.get( taskJxDbUrl("double_sign/IssueReward",), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (safeGet(data)) {
-            data = JSON.parse(data);
+            data = JSON.parse( data );
             if(data.retCode ===0){
               console.log(`双签成功，获得金币${data.data.jd_amount / 100}元`)
               $.money += data.data.jd_amount / 100
@@ -238,7 +246,24 @@ function taskUrl(functionId, body = '') {
       'Connection': 'keep-alive',
       'Content-Type': 'application/x-www-form-urlencoded',
       'Referer': 'https://jddx.jd.com/m/jddnew/money/index.html',
-      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      'Accept-Language': 'zh-cn',
+      'Accept-Encoding': 'gzip, deflate, br',
+    }
+  }
+}
+
+function taskJxDbUrl ( functionId, body = '' ) {
+  const jxsid = cookie.match( /jxsid=(\d*)(?=;?)/ );
+  return {
+    url: `${ JD_API_HOST }${ functionId }?sceneval=2&g_login_type=1&g_ty=ls&${ body }`,
+    headers: {
+      'Cookie': cookie,
+      'Host': 'wq.jd.com',
+      'Connection': 'keep-alive',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Referer': `https://wqs.jd.com/pingou/jxapp_double_signin/index.html?jxsid=${ jxsid[1] }`,
+      'User-Agent': $.isNode() ? ( process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : ( require( './USER_AGENTS' ).USER_AGENT ) ) : ( $.getdata( 'JDUA' ) ? $.getdata( 'JDUA' ) : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1" ),
       'Accept-Language': 'zh-cn',
       'Accept-Encoding': 'gzip, deflate, br',
     }
@@ -257,7 +282,7 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
       }
     }
     $.post(options, (err, resp, data) => {
