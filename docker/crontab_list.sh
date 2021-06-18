@@ -139,3 +139,77 @@
 15 0,12,22 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 #京喜牧场
 15 0,12,22 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
+#赚金币
+0 5 * * * node /scripts/jd_zjb.js >> /scripts/logs/jd_zjb.log 2>&1
+#是兄弟就砍我2
+0 5 * * * node /scripts/jd_kanjia2.js >> /scripts/logs/jd_kanjia2.log 2>&1
+#0元砍价
+0 6 * * * node /scripts/jd_kanjia3.js >> /scripts/logs/jd_kanjia3.log 2>&1
+#惊喜工厂抢茅台
+0 6 * * * node /scripts/jd_jxgc.js >> /scripts/logs/jd_jxgc.log 2>&1
+#618惊奇探秘夜
+0 6 * * * node /scripts/jd_qqtmy.js >> /scripts/logs/jd_qqtmy.log 2>&1
+#推一推
+0 0 * * * node /scripts/jd_tyt.js >> /scripts/logs/jd_tyt.log 2>&1
+#华为荣耀618
+0 6 * * * node /scripts/jd_ry618.js >> /scripts/logs/jd_ry618.log 2>&1
+#邀请有礼
+0 0 * * * node /scripts/jd_yqyl.js >> /scripts/logs/jd_yqyl.log 2>&1
+#全民挖现金
+0 6 * * * node /scripts/jd_qmwxj.js >> /scripts/logs/jd_qmwxj.log 2>&1
+#品牌狂欢日
+0 6 * * * node /scripts/jd_ppkhr.js >> /scripts/logs/jd_ppkhr.log 2>&1
+#泡泡大战
+1 0 * * * node /scripts/jd_ppdz.js >> /scripts/logs/jd_ppdz.log 2>&1
+#我是大老板农场
+5 0-23/6 * * * node /scripts/jd_wsdlb.js >> /scripts/logs/jd_wsdlb.log 2>&1
+#省钱大赢家获取邀请码
+0 6 * * * node /scripts/jd_sq.js >> /scripts/logs/jd_sq.log 2>&1
+#省钱大赢家
+0,2 0 * * * node /scripts/jd_sqdyj.js >> /scripts/logs/jd_sqdyj.log 2>&1
+#是兄弟就砍我
+0 0 * * * node /scripts/jd_kanjia.js >> /scripts/logs/jd_kanjia.log 2>&1
+#粽情端午
+15 13 6-18 6 * node /scripts/jd_Longzhou02.js >> /scripts/logs/jd_Longzhou02.log 2>&1
+#大牌联合'臻'宠粉丝
+15 9 1-18 6 * node /scripts/jd_Opencard07.js >> /scripts/logs/jd_Opencard07.log 2>&1
+#大牌联合618提前购
+0 6 * * * node /scripts/jd_Opencard01.js >> /scripts/logs/jd_Opencard01.log 2>&1
+#大牌强联合好物提前购
+0 6 * * * node /scripts/jd_Opencard02.js >> /scripts/logs/jd_Opencard02.log 2>&1
+#宝洁消消乐
+18 9 1-18 6 * node /scripts/jd_Baojiexiaoxiaole.js >> /scripts/logs/jd_Baojiexiaoxiaole.log 2>&1
+#合肥旗舰店开业
+0 6 * * * node /scripts/jd_Supershophf.js >> /scripts/logs/jd_Supershophf.log 2>&1
+#大牌强联合好物提前购
+0 6 * * * node /scripts/jd_Opencard03.js >> /scripts/logs/jd_Opencard03.log 2>&1
+#618年中购
+0 6 * * * node /scripts/jd_Opencard09.js >> /scripts/logs/jd_Opencard09.log 2>&1
+#618大牌联合
+0 6 * * * node /scripts/jd_Opencard08.js >> /scripts/logs/jd_Opencard08.log 2>&1
+#新潮品牌狂欢
+15 9 1-18 6 * node /scripts/jd_Brandcity.js >> /scripts/logs/jd_Brandcity.log 2>&1
+#京喜88红包
+8 8 * 6 * node /scripts/jd_Jx88hongbao.js >> /scripts/logs/jd_Jx88hongbao.log 2>&1
+#大牌联合'臻'宠粉丝
+15 9 1-18 6 * node /scripts/jd_Opencard07.js >> /scripts/logs/jd_Opencard07.log 2>&1
+#618年中购
+0 6 * * * node /scripts/jd_Opencard09.js >> /scripts/logs/jd_Opencard09.log 2>&1
+#618大牌联合
+0 6 * * * node /scripts/jd_Opencard08.js >> /scripts/logs/jd_Opencard08.log 2>&1
+#粽情端午
+0 6 * * * node /scripts/jd_Longzhou02.js >> /scripts/logs/jd_Longzhou2.log 2>&1
+#618母婴夺宝大作战
+15 9 9-20 6 * node /scripts/jd_Opencard06.js >> /scripts/logs/jd_Opencard06.log 2>&1
+#年中钜惠抢先购
+0 6 * * * node /scripts/jd_Opencard10.js >> /scripts/logs/jd_Opencard10.log 2>&1
+#限时盲盒
+15 12 1-18 6 * node /scripts/jd_Limitbox.js >> /scripts/logs/jd_Limitbox.log 2>&1
+#大牌联合'臻'宠粉丝
+10 10 4-20 6 * node /scripts/jd_Opencard05.js >> /scripts/logs/jd_Opencard05.log 2>&1
+#GNC组队瓜分京豆
+0 6 * * * node /scripts/jd_Jointeam01.js >> /scripts/logs/jd_Jointeam01.log 2>&1
+#与'粽'不同
+15 13 1-18 6 * node /scripts/jd_Longzhou.js >> /scripts/logs/jd_Longzhou.log 2>&1
+#大牌联合宠爱有礼
+0 6 * * * node /scripts/jd_Opencard04.js >> /scripts/logs/jd_Opencard04.log 2>&1
