@@ -295,7 +295,7 @@ function starRanking() {
 function getHomePage() {
   return new Promise((resolve) => {
     const options = taskPostUrl('task/getList', 'getList', `starId=${$.activeId}`);
-    $.post(options, async (err, resp, data) => {
+    $.post( options, async ( err, resp, data ) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`);
