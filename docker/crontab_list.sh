@@ -209,3 +209,5 @@
 15 13 1-18 6 * node /scripts/jd_Longzhou.js >> /scripts/logs/jd_Longzhou.log 2>&1
 #大牌联合宠爱有礼
 0 6 * * * node /scripts/jd_Opencard04.js >> /scripts/logs/jd_Opencard04.log 2>&1
+#京东试用
+30 10 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
