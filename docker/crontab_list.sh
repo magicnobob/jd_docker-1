@@ -213,3 +213,5 @@
 30 10 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
 #东东电竞经理
 15 10 * * * node /scripts/jd_zooElecsport.js >> /scripts/logs/jd_zooElecsport.log 2>&1
+#QQ星系牧场
+30 7 * * * node /scripts/jd_qqxing.js >> /scripts/logs/jd_qqxing.log 2>&1
