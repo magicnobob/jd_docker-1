@@ -211,3 +211,5 @@
 0 6 * * * node /scripts/jd_Opencard04.js >> /scripts/logs/jd_Opencard04.log 2>&1
 #京东试用
 30 10 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
+#东东电竞经理
+15 10 * * * node /scripts/jd_zooElecsport.js >> /scripts/logs/jd_zooElecsport.log 2>&1
