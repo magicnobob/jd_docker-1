@@ -5,17 +5,17 @@
 ============Quantumultx===============
 [task_local]
 #京喜签到
-5 0 * * * jx_sign.js, tag=京喜签到, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+5 0 * * * jd_jxsign.js, tag=京喜签到, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "5 0 * * *" script-path=jx_sign.js,tag=京喜签到
+cron "5 0 * * *" script-path=jd_jxsign.js,tag=京喜签到
 
 ===============Surge=================
-京喜签到 = type=cron,cronexp="5 0 * * *",wake-system=1,timeout=3600,script-path=jx_sign.js
+京喜签到 = type=cron,cronexp="5 0 * * *",wake-system=1,timeout=3600,script-path=jd_jxsign.js
 
 ============小火箭=========
-京喜签到 = type=cron,script-path=jx_sign.js, cronexpr="5 0 * * *", timeout=3600, enable=true
+京喜签到 = type=cron,script-path=jd_jxsign.js, cronexpr="5 0 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京喜签到');
 const notify = $.isNode() ? require('../sendNotify') : '';
