@@ -15,10 +15,21 @@ update 2021/4/11
 30 10 * * * https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js, tag=京东试用, img-url=https://raw.githubusercontent.com/ZCY01/img/master/jdtryv1.png, enabled=true
  */
 const $ = new Env('京东试用')
-
+const notify = $.isNode() ? require( './sendNotify' ) : '';
+const jdCookieNode = $.isNode() ? require( './jdCookie.js' ) : '';
+let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
+let cookiesArr = [], cookie = '', message = '', allMessage = '';
 const selfDomain = 'https://try.m.jd.com'
-let allGoodList = []
-
+let allGoodList = [];
+if ( $.isNode() ) {
+	Object.keys( jdCookieNode ).forEach( ( item ) => {
+		cookiesArr.push( jdCookieNode[ item ] )
+	} )
+	if ( process.env.JD_DEBUG && process.env.JD_DEBUG === 'false' ) console.log = () => { };
+} else {
+	cookiesArr = [ $.getdata( 'CookieJD' ), $.getdata( 'CookieJD2' ), ...jsonParse( $.getdata( 'CookiesJD' ) || "[]" ).map( item => item.cookie ) ].filter( item => !!item );
+}
+console.warn( cookiesArr);
 // default params
 const args = {
 	jdNotify: false,
@@ -55,16 +66,16 @@ const typeMap = {
 	}
 
 	!(async () => {
-		await requireConfig()
-		if (!$.cookiesArr[0]) {
+		// await requireConfig()
+		if (!cookiesArr[0]) {
 			$.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
 				"open-url": "https://bean.m.jd.com/"
 			})
 			return
 		}
-		for (let i = 0; i < $.cookiesArr.length; i++) {
-			if ($.cookiesArr[i]) {
-				$.cookie = $.cookiesArr[i];
+		for (let i = 0; i < cookiesArr.length; i++) {
+			if (cookiesArr[i]) {
+				$.cookie = cookiesArr[i];
 				$.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
 				$.index = i + 1;
 				$.isLogin = true;
@@ -75,7 +86,7 @@ const typeMap = {
 					$.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
 						"open-url": "https://bean.m.jd.com/bean/signIndex.action"
 					});
-					await $.notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+					await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
 					continue
 				}
 
@@ -105,21 +116,21 @@ function requireConfig() {
 		$.notify = $.isNode() ? require('../ql/repo/panghu999_jd_scripts/sendNotify') : {sendNotify:async () => {}}
 
 		//获取 Cookies
-		$.cookiesArr = []
+		cookiesArr = []
 		if ($.isNode()) {
 			//Node.js用户请在jdCookie.js处填写京东ck;
 			const jdCookieNode = require('../ql/repo/panghu999_jd_scripts/jdCookie.js');
 			Object.keys(jdCookieNode).forEach((item) => {
 				if (jdCookieNode[item]) {
-					$.cookiesArr.push(jdCookieNode[item])
+					cookiesArr.push(jdCookieNode[item])
 				}
 			})
 			if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 		} else {
 			//IOS等用户直接用NobyDa的jd $.cookie
-			$.cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+			cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 		}
-		console.log(`共${$.cookiesArr.length}个京东账号\n`)
+		console.log(`共${cookiesArr.length}个京东账号\n`)
 
 		if ($.isNode()) {
 			if (process.env.JD_TRY_CIDS_KEYS) {
@@ -431,7 +442,7 @@ async function showMsg() {
 		$.msg($.name, ``, message, {
 			"open-url": 'https://try.m.jd.com/user'
 		})
-		await $.notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, message)
+		await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, message)
 	} else {
 		console.log(message)
 	}
