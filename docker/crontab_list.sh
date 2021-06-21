@@ -26,8 +26,6 @@
 0 0-23/4 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
 #明星小店(星店长，2021-06-10)
 0 1,21 * * * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
-#新潮品牌狂欢（6.18过期）
-20 1,21 * * * node /scripts/jd_mcxhd.js >> /scripts/logs/jd_mcxhd.log 2>&1
 #京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #省钱大赢家之翻翻乐
@@ -179,8 +177,6 @@
 0 6 * * * node /scripts/jd_Opencard09.js >> /scripts/logs/jd_Opencard09.log 2>&1
 #618大牌联合
 0 6 * * * node /scripts/jd_Opencard08.js >> /scripts/logs/jd_Opencard08.log 2>&1
-#新潮品牌狂欢
-15 9 1-18 6 * node /scripts/jd_Brandcity.js >> /scripts/logs/jd_Brandcity.log 2>&1
 #京喜88红包
 8 8 * 6 * node /scripts/jd_Jx88hongbao.js >> /scripts/logs/jd_Jx88hongbao.log 2>&1
 #大牌联合'臻'宠粉丝

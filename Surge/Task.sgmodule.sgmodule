@@ -47,7 +47,6 @@ crazyJoy挂机 = type=cron,cronexp="10 1,12 * * *",wake-system=1,timeout=20,scri
 京东直播 = type=cron,cronexp="10-20/5 12 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_live.js
 超级直播间红包雨 = type=cron,cronexp="0,30 0-23/1 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_live_redrain.js
 幸运大转盘 = type=cron,cronexp="4 10 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_market_lottery.js
-新潮品牌狂欢 = type=cron,cronexp="4 10 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_mcxhd.js
 5G超级盲盒 = type=cron,cronexp="0 0,1-23/3 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_mohe.js
 京东摇钱树 = type=cron,cronexp="3 0-23/2 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_moneyTree.js
 京东秒秒币 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_ms.js
