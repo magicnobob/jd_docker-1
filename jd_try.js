@@ -29,7 +29,7 @@ if ( $.isNode() ) {
 } else {
 	cookiesArr = [ $.getdata( 'CookieJD' ), $.getdata( 'CookieJD2' ), ...jsonParse( $.getdata( 'CookiesJD' ) || "[]" ).map( item => item.cookie ) ].filter( item => !!item );
 }
-console.warn( cookiesArr);
+// console.warn( cookiesArr);
 // default params
 const args = {
 	jdNotify: false,
