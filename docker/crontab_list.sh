@@ -171,8 +171,6 @@
 0 6 * * * node /scripts/jd_Opencard01.js >> /scripts/logs/jd_Opencard01.log 2>&1
 #大牌强联合好物提前购
 0 6 * * * node /scripts/jd_Opencard02.js >> /scripts/logs/jd_Opencard02.log 2>&1
-#宝洁消消乐
-18 9 1-18 6 * node /scripts/jd_Baojiexiaoxiaole.js >> /scripts/logs/jd_Baojiexiaoxiaole.log 2>&1
 #合肥旗舰店开业
 0 6 * * * node /scripts/jd_Supershophf.js >> /scripts/logs/jd_Supershophf.log 2>&1
 #大牌强联合好物提前购
