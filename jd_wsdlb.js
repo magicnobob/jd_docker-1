@@ -79,7 +79,7 @@ async function jdFruit () {
   if ( $.info.data.firstJoinFlag === true ) {
     $.log( "您忘了种植新的水果，快打开极速版种植吧" )
 
-    allMessage += `京东账号${ $.index }-${ $.nickName || $.UserName }\n您忘了种植新的水果,内侧入口为：\nhttp://a8pck.cn/VbjDm${ $.index !== cookiesArr.length ? '\n\n' : '\n\n' }`;
+    allMessage += `京东账号${ $.index }-${ $.nickName || $.UserName }\n您忘了种植新的水果,内测入口为：\nhttp://a8pck.cn/VbjDm${ $.index !== cookiesArr.length ? '\n\n' : '\n\n' }`;
   } else if ( $.info.data.firstJoinFlag === false ) {
 
     console.log( `\n当前种植水果：${ $.info.data.plantInfo[ 0 ].cropName }\n当前阶段: ${ $.info.data.plantInfo[ 0 ].nowStep }\n当前下一阶段还需要浇水：${ $.info.data.plantInfo[ 0 ].upgradeWateringNum }次` )
