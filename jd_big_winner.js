@@ -51,13 +51,14 @@ const len = cookiesArr.length;
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
+      await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       await main()
     }
   }
   if (message) {
     $.msg($.name, '', message);
-    //if ($.isNode()) await notify.sendNotify($.name, message);
+    if ($.isNode()) await notify.sendNotify($.name, message);
   }
 })()
     .catch((e) => {
@@ -92,7 +93,50 @@ async function main() {
     $.logErr(e)
   }
 }
-
+function TotalBean () {
+  return new Promise( async resolve => {
+    const options = {
+      url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
+      headers: {
+        Host: "me-api.jd.com",
+        Accept: "*/*",
+        Connection: "keep-alive",
+        Cookie: cookie,
+        "User-Agent": $.isNode() ? ( process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : ( require( './USER_AGENTS' ).USER_AGENT ) ) : ( $.getdata( 'JDUA' ) ? $.getdata( 'JDUA' ) : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1" ),
+        "Accept-Language": "zh-cn",
+        "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
+        "Accept-Encoding": "gzip, deflate, br"
+      }
+    }
+    $.get( options, ( err, resp, data ) => {
+      try {
+        if ( err ) {
+          $.logErr( err )
+        } else {
+          if ( data ) {
+            data = JSON.parse( data );
+            if ( data[ 'retcode' ] === "1001" ) {
+              $.isLogin = false; //cookie过期
+              return;
+            }
+            if ( data[ 'retcode' ] === "0" && data.data && data.data.hasOwnProperty( "userInfo" ) ) {
+              $.nickName = data.data.userInfo.baseInfo.nickname;
+            }
+            if ( data[ 'retcode' ] === '0' && data.data && data.data[ 'assetInfo' ] ) {
+              $.beanCount = data.data && data.data[ 'assetInfo' ][ 'beanNum' ];
+            }
+          } else {
+            $.log( '京东服务器返回空数据' );
+          }
+        }
+      } catch ( e ) {
+        $.logErr( e )
+      } finally {
+        resolve();
+      }
+    } )
+  } )
+}
 
 //查询剩余多长时间可进行翻翻乐
 function gambleHomePage() {
@@ -125,7 +169,7 @@ function gambleHomePage() {
               } else {
                 $.time = (data.data.leftTime / (60 * 1000)).toFixed(2);
               }
-              console.log(`\n查询下次翻翻乐剩余时间成功：\n京东账号【${$.UserName}】距开始剩 ${$.time} 分钟`);
+              console.log( `\n查询下次翻翻乐剩余时间成功：\n京东账号【${ $.nickName || $.UserName}】距开始剩 ${$.time} 分钟`);
             } else {
               console.log(`查询下次翻翻乐剩余时间失败：${JSON.stringify(data)}\n`);
             }
