@@ -30,7 +30,8 @@ let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 
 let cookiesArr = [], cookie = '';
 
 const https = require('https');
-const fs = require('fs/promises');
+const fs = require( 'fs' ).promises;
+// const fs = require('fs/promises');
 const { R_OK } = require('fs').constants;
 const vm = require('vm');
 const UA = require('./USER_AGENTS.js').USER_AGENT;
