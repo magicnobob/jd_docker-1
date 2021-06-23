@@ -486,6 +486,7 @@ function taskurl(url, goodId) {
 // 					console.log(`${JSON.stringify(err)}`)
 // 					console.log(`${$.name} API请求失败，请检查网路重试`)
 // 				} else {
+// 					console.warn( "|||||||||||=====,,,,", data);
 // 					if (data) {
 // 						data = JSON.parse(data);
 // 						if (data['retcode'] === 13) {
@@ -517,7 +518,7 @@ function totalBean () {
 				Host: "me-api.jd.com",
 				Accept: "*/*",
 				Connection: "keep-alive",
-				Cookie: cookie,
+				Cookie: $.cookie,
 				"User-Agent": $.isNode() ? ( process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : ( require( './USER_AGENTS' ).USER_AGENT ) ) : ( $.getdata( 'JDUA' ) ? $.getdata( 'JDUA' ) : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1" ),
 				"Accept-Language": "zh-cn",
 				"Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
