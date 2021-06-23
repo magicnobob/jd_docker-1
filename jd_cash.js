@@ -62,10 +62,17 @@ let allMessage = '';
   //   }
   // }
   // console.log( `您提供了${ newShareCodes.length }个账号的${ $.name }助力码\n` );
+  for ( let i = 0; i < cookiesArr.length; i++ ){
+    if ( cookiesArr[ i ] ) {
+      cookie = cookiesArr[ i ];
+      $.UserName = decodeURIComponent( cookie.match( /pt_pin=([^; ]+)(?=;?)/ ) && cookie.match( /pt_pin=([^; ]+)(?=;?)/ )[ 1 ] )
+      await TotalBean();
+      await getCookieInviteCode( $.nickName || $.UserName, cookie );
+    }
+  }
   for ( let i = 0; i < cookiesArr.length; i++ ) {
     if ( cookiesArr[ i ] ) {
       cookie = cookiesArr[ i ];
-      await getCookieInviteCode( $.nickName || $.UserName, cookie );
       $.UserName = decodeURIComponent( cookie.match( /pt_pin=([^; ]+)(?=;?)/ ) && cookie.match( /pt_pin=([^; ]+)(?=;?)/ )[ 1 ] )
       $.index = i + 1;
       $.isLogin = true;
@@ -150,7 +157,7 @@ function getCookieInviteCode (cookieName,cookie) {
         } else {
           if ( safeGet( data ) ) {
             data = JSON.parse( data );
-            console.warn( data );
+            // console.warn( data );
             if ( data.code === 0 && data.data.bizCode === 0 ) {
               // console.log( `你的inviteCode: ${ data.data.result.inviteCode }` )
               // console.log( `你的shareDate: ${ data.data.result.shareDate }` )
