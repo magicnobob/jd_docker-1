@@ -60,8 +60,6 @@
     {"config":"11 * * * * https://gitee.com/zhaozhanzhan520/jd_docker/blob/master/jd_superMarket.js, tag=东东超市, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true", "addons":"https://github.com/zhaozhanzhan/jd_docker/raw/master/QuantumultX/cookies.conf"},
     {"config":"10 0,7,23 * * * https://gitee.com/zhaozhanzhan520/jd_docker/blob/master/jd_syj.js, tag=赚京豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_syj.png, enabled=true", "addons":"https://github.com/zhaozhanzhan/jd_docker/raw/master/QuantumultX/cookies.conf"},
     {"config":"55 23 * * * https://gitee.com/zhaozhanzhan520/jd_docker/blob/master/jd_unsubscribe.js, tag=取关京东店铺商品, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true", "addons":"https://github.com/zhaozhanzhan/jd_docker/raw/master/QuantumultX/cookies.conf"},
-    {"config":"33 0,6-23/2 * * * https://gitee.com/zhaozhanzhan520/jd_docker/blob/master/jd_zoo.js, tag=618动物联萌, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true", "addons":"https://github.com/zhaozhanzhan/jd_docker/raw/master/QuantumultX/cookies.conf"},
-    {"config":"0-59/30 * * * * https://gitee.com/zhaozhanzhan520/jd_docker/blob/master/jd_zooCollect.js, tag=618动物联萌收集金币, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true", "addons":"https://github.com/zhaozhanzhan/jd_docker/raw/master/QuantumultX/cookies.conf"},
     {"config":"15 17 * * * https://gitee.com/zhaozhanzhan520/jd_docker/blob/master/backUp/xmSports.js, tag=小米运动, img-url=https://raw.githubusercontent.com/58xinian/icon/master/xmyd.png, enabled=true", "addons":"https://github.com/zhaozhanzhan/jd_docker/raw/master/QuantumultX/cookies.conf"}
   ]
 }
