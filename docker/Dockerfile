@@ -26,6 +26,7 @@ RUN set -ex \
     && apk update \
     && apk upgrade \
     && apk add --no-cache bash tzdata git moreutils curl jq openssh-client \
+    && apk add --no-cache make gcc g++ python3-dev pkgconfig pixman-dev cairo-dev pango-dev libjpeg-turbo-dev giflib-dev \
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
