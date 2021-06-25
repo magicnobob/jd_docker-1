@@ -205,3 +205,5 @@
 30 7 * * * node /scripts/jd_qqxing.js >> /scripts/logs/jd_qqxing.log 2>&1
 #京享值PK
 15 0,6,13,19,21 * * * node /scripts/jd_jxzpk.js >> /scripts/logs/jd_jxzpk.log 2>&1
+#柠檬众筹好物上新
+20 12,14 * * * * * * node /scripts/jd_hwsx.js >> /scripts/logs/jd_hwsx.log 2>&1
