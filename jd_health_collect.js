@@ -56,9 +56,10 @@ const JD_API_HOST = "https://api.m.jd.com/client.action";
 			$.UserName = decodeURIComponent(
 				cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]
 			);
+			await TotalBean();
 			$.index = i + 1;
 			message = "";
-			console.log(`\n******开始【京东账号${$.index}】${$.UserName}*********\n`);
+			console.log( `\n******开始【京东账号${ $.index }】${ $.nickName||$.UserName}*********\n`);
 			await collectScore();
 		}
 	}
@@ -99,7 +100,50 @@ function collectScore() {
 		});
 	});
 }
-
+function TotalBean () {
+	return new Promise( async resolve => {
+		const options = {
+			url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
+			headers: {
+				Host: "me-api.jd.com",
+				Accept: "*/*",
+				Connection: "keep-alive",
+				Cookie: cookie,
+				"User-Agent": $.isNode() ? ( process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : ( require( './USER_AGENTS' ).USER_AGENT ) ) : ( $.getdata( 'JDUA' ) ? $.getdata( 'JDUA' ) : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1" ),
+				"Accept-Language": "zh-cn",
+				"Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
+				"Accept-Encoding": "gzip, deflate, br"
+			}
+		}
+		$.get( options, ( err, resp, data ) => {
+			try {
+				if ( err ) {
+					$.logErr( err )
+				} else {
+					if ( data ) {
+						data = JSON.parse( data );
+						if ( data[ 'retcode' ] === "1001" ) {
+							$.isLogin = false; //cookie过期
+							return;
+						}
+						if ( data[ 'retcode' ] === "0" && data.data && data.data.hasOwnProperty( "userInfo" ) ) {
+							$.nickName = data.data.userInfo.baseInfo.nickname;
+						}
+						if ( data[ 'retcode' ] === '0' && data.data && data.data[ 'assetInfo' ] ) {
+							$.beanCount = data.data && data.data[ 'assetInfo' ][ 'beanNum' ];
+						}
+					} else {
+						$.log( '京东服务器返回空数据' );
+					}
+				}
+			} catch ( e ) {
+				$.logErr( e )
+			} finally {
+				resolve();
+			}
+		} )
+	} )
+}
 function taskUrl(function_id, body = {}) {
 	return {
 		url: `${JD_API_HOST}/client.action?functionId=${function_id}&body=${escape(
