@@ -160,3 +160,5 @@
 15 0,6,13,19,21 * * * node /scripts/jd_jxzpk.js >> /scripts/logs/jd_jxzpk.log 2>&1
 #柠檬众筹好物上新
 20 12,14 * * * * * * node /scripts/jd_hwsx.js >> /scripts/logs/jd_hwsx.log 2>&1
+#点点券
+10 0,20 * * * node /scripts/jd_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
