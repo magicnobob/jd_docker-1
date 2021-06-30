@@ -8,10 +8,10 @@
  使用bot交互+spnode后 后续执行脚本命令请使用spnode否者无法使用logs/cookies.conf的cookies执行脚本，定时任务也将自动替换为spnode命令执行
  发送/spnode给bot获取可执行脚本的列表，选择对应的按钮执行。(拓展使用：运行指定路径脚本，例：/spnode /scripts/jd_818.js)
  spnode功能概述示例
- spnode conc /scripts/jd_bean_change.js 为每个cookie单独执行jd_bean_change脚本（伪并发
- spnode 1 /scripts/jd_bean_change.js 为logs/cookies.conf文件里面第一行cookie账户单独执行jd_bean_change脚本
- spnode jd_XXXX /scripts/jd_bean_change.js 为logs/cookies.conf文件里面pt_pin=jd_XXXX的cookie账户单独执行jd_bean_change脚本
- spnode /scripts/jd_bean_change.js 为logs/cookies.conf所有cookies账户一起执行jd_bean_change脚本
+ spnode conc /scripts/jd_bean_month_change.js 为每个cookie单独执行jd_bean_month_change脚本（伪并发
+ spnode 1 /scripts/jd_bean_month_change.js 为logs/cookies.conf文件里面第一行cookie账户单独执行jd_bean_month_change脚本
+ spnode jd_XXXX /scripts/jd_bean_month_change.js 为logs/cookies.conf文件里面pt_pin=jd_XXXX的cookie账户单独执行jd_bean_month_change脚本
+ spnode /scripts/jd_bean_month_change.js 为logs/cookies.conf所有cookies账户一起执行jd_bean_month_change脚本
 
 **请仔细阅读并理解上面的内容，使用bot交互默认开启spnode指令功能功能。** 
 + 2021-03-9更新 新版docker单容器多账号自动互助
@@ -155,7 +155,7 @@ jd_scripts
 # 取关京东店铺商品
 55 23 * * * node /scripts/jd_unsubscribe.js >> /scripts/logs/jd_unsubscribe.log 2>&1
 # 京豆变动通知
-0 10 * * * node /scripts/jd_bean_change.js >> /scripts/logs/jd_bean_change.log 2>&1
+0 10 * * * node /scripts/jd_bean_month_change.js >> /scripts/logs/jd_bean_month_change.log 2>&1
 # 京东抽奖机
 11 1 * * * node /scripts/jd_lotteryMachine.js >> /scripts/logs/jd_lotteryMachine.log 2>&1
 # 京东排行榜

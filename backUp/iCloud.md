@@ -158,7 +158,8 @@ let CookieJDs = [
 |      JavaScript      |         脚本名称          | 活动时间 |  serverless.yml   |
 | :------------------: | :-----------------------: | :------: | :---------------: |
 |    `getJDCookie`     |    扫码获取京东Cookie     |   长期   |         /         |
-|   `jd_bean_change`   |       京豆变动通知        |   长期   |    30 7 * * *     |
+|   `jd_bean_month_change`   |       京豆月变动通知        |   长期   |    10 7 1-31/7 * *     |
+|   `jd_bean_day_change`   |       京豆日变动通知        |   长期   |    2 9 * * *     |
 |    `jd_bean_home`    |      领京豆额外奖励       |   长期   |    30 7 * * *     |
 |    `jd_bean_sign`    |         京豆签到          |   长期   |     0 0 * * *     |
 |     `jd_beauty`      |        美丽研究院         |   长期   | 0 0-16/8,20 * * * |

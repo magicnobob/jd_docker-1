@@ -5,7 +5,8 @@
 # TG讨论组 (https://t.me/jd_scripts_talk)
 
 [Script]
-京东资产变动通知 = type=cron,cronexp="2 9 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_bean_change.js
+京东月资产变动通知 = type=cron,cronexp="20 9 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_bean_month_change.js
+京东日资产变动通知 = type=cron,cronexp="20 8 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_bean_day_change.js
 领京豆额外奖励 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_bean_home.js
 省钱大赢家之翻翻乐 = type=cron,cronexp="20 * * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_big_winner.js
 东东超市兑换奖品 = type=cron,cronexp="0 0 0 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/zhaozhanzhan520/jd_docker/tree/master/jd_blueCoin.js

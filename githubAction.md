@@ -127,7 +127,7 @@
 
   > 如果你填写了推送通知方式中的某一种通知所需环境变量，那么脚本通知情况如下：
 
-  > 目前默认只有jd_fruit.js,jd_pet.js,jd_bean_sign.js,jd_bean_change.js,jd_jxnc.js这些脚本(默认)每次运行后都通知
+  > 目前默认只有jd_fruit.js,jd_pet.js,jd_bean_sign.js,jd_bean_month_change.js,jd_bean_day_change.js,jd_jxnc.js这些脚本(默认)每次运行后都通知
 
   ```
 其余的脚本平常运行都是不通知，只有在京东cookie失效以及达到部分条件后，才会推送通知    

@@ -44,10 +44,10 @@ def start(update, context):
                             "使用bot交互+spnode后 后续用户的cookie维护更新只需要更新logs/cookies.list即可\n" \
                             "使用bot交互+spnode后 后续执行脚本命令请使用spnode否者无法使用logs/cookies.list的cookies执行脚本，定时任务也将自动替换为spnode命令执行\n" \
                             "spnode功能概述示例\n\n" \
-                            "spnode conc /scripts/jd_bean_change.js 为每个cookie单独执行jd_bean_change脚本（伪并发\n" \
-                            "spnode 1 /scripts/jd_bean_change.js 为logs/cookies.list文件里面第一行cookie账户单独执行jd_bean_change脚本\n" \
-                            "spnode jd_XXXX /scripts/jd_bean_change.js 为logs/cookies.list文件里面pt_pin=jd_XXXX的cookie账户单独执行jd_bean_change脚本\n" \
-                            "spnode /scripts/jd_bean_change.js 为logs/cookies.list所有cookies账户一起执行jd_bean_change脚本\n" \
+                            "spnode conc /scripts/jd_bean_month_change.js 为每个cookie单独执行jd_bean_month_change脚本（伪并发\n" \
+                            "spnode 1 /scripts/jd_bean_month_change.js 为logs/cookies.list文件里面第一行cookie账户单独执行jd_bean_month_change脚本\n" \
+                            "spnode jd_XXXX /scripts/jd_bean_month_change.js 为logs/cookies.list文件里面pt_pin=jd_XXXX的cookie账户单独执行jd_bean_month_change脚本\n" \
+                            "spnode /scripts/jd_bean_month_change.js 为logs/cookies.list所有cookies账户一起执行jd_bean_month_change脚本\n" \
                             "请仔细阅读并理解上面的内容，使用bot交互默认开启spnode指令功能功能。\n" \
                             "如需____停用___请配置环境变量 -DISABLE_SPNODE=True"
         context.bot.send_message(chat_id=update.effective_chat.id,
@@ -994,10 +994,10 @@ def unknown(update, context):
                             "使用bot交互+spnode后 后续用户的cookie维护更新只需要更新logs/cookies.list即可\n" \
                             "使用bot交互+spnode后 后续执行脚本命令请使用spnode否者无法使用logs/cookies.list的cookies执行脚本，定时任务也将自动替换为spnode命令执行\n" \
                             "spnode功能概述示例\n\n" \
-                            "spnode conc /scripts/jd_bean_change.js 为每个cookie单独执行jd_bean_change脚本（伪并发\n" \
-                            "spnode 1 /scripts/jd_bean_change.js 为logs/cookies.list文件里面第一行cookie账户单独执行jd_bean_change脚本\n" \
-                            "spnode jd_XXXX /scripts/jd_bean_change.js 为logs/cookies.list文件里面pt_pin=jd_XXXX的cookie账户单独执行jd_bean_change脚本\n" \
-                            "spnode /scripts/jd_bean_change.js 为logs/cookies.list所有cookies账户一起执行jd_bean_change脚本\n" \
+                            "spnode conc /scripts/jd_bean_month_change.js 为每个cookie单独执行jd_bean_month_change脚本（伪并发\n" \
+                            "spnode 1 /scripts/jd_bean_month_change.js 为logs/cookies.list文件里面第一行cookie账户单独执行jd_bean_month_change脚本\n" \
+                            "spnode jd_XXXX /scripts/jd_bean_month_change.js 为logs/cookies.list文件里面pt_pin=jd_XXXX的cookie账户单独执行jd_bean_month_change脚本\n" \
+                            "spnode /scripts/jd_bean_month_change.js 为logs/cookies.list所有cookies账户一起执行jd_bean_month_change脚本\n" \
                             "请仔细阅读并理解上面的内容，使用bot交互默认开启spnode指令功能功能。\n" \
                             "如需____停用___请配置环境变量 -DISABLE_SPNODE=True"
         update.message.reply_text(text="⚠️ 您输入了一个错误的指令，请参考说明使用\n" \
