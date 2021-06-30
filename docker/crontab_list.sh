@@ -166,5 +166,3 @@
 10 0,20 * * * node /scripts/jd_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
 #狂欢欧洲杯
 15 8,12 * * * node /scripts/jd_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
-#特物Z|万物皆可国创
-30 11 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
