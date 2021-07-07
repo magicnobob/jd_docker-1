@@ -17,6 +17,7 @@
 # =============解决文件已经添加无法排除============= #
 
 /node_modules/
+/jd_scripts/
 /yarn.lock
 /.idea
 /.history
@@ -27,3 +28,9 @@
 # /JD_DailyBonus.js
 /result.txt
 /CookieList.js
+/docker/custom_list_file.sh
+/docker/merged_list_file.sh*
+/docker/my_crontab_list.sh*
+my_crontab_list.sh
+docker-compose.yml
+/logs/
